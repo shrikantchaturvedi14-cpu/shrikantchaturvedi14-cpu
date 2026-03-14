@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shrikant Chaturvedi — App & Production Support Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #252535;
+    --accent: #00e5ff;
+    --accent2: #7b61ff;
+    --accent3: #ff6b35;
+    --text: #e8e8f0;
+    --muted: #888899;
+    --green: #00ff88;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    top: -200px;
+    right: -200px;
+    pointer-events: none;
+  }
+
+  .hero-glow2 {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(123,97,255,0.06) 0%, transparent 70%);
+    bottom: -100px;
+    left: 100px;
+    pointer-events: none;
+  }
+
+  .hero-content { max-width: 900px; }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,229,255,0.08);
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-name {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero-name span {
+    display: block;
+    background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    color: var(--muted);
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.75;
+    margin-bottom: 40px;
+    animation: fadeUp 0.6s 0.3s ease both;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.88rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #000;
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,229,255,0.3);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* METRICS STRIP */
+  .metrics-strip {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0 48px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .metric-item {
+    padding: 32px 20px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    flex: 1;
+    min-width: 130px;
+  }
+
+  .metric-item:last-child { border-right: none; }
+
+  .metric-val {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 80px 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* EXPERIENCE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+    overflow: hidden;
+  }
+
+  .exp-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .exp-card:hover {
+    border-color: rgba(0,229,255,0.25);
+    transform: translateX(4px);
+  }
+
+  .exp-card:hover::before { opacity: 1; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .exp-company {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+
+  .exp-role {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-family: 'DM Mono', monospace;
+    margin-top: 4px;
+  }
+
+  .exp-meta {
+    text-align: right;
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  .exp-badge {
+    display: inline-block;
+    background: rgba(123,97,255,0.15);
+    border: 1px solid rgba(123,97,255,0.3);
+    border-radius: 100px;
+    padding: 3px 10px;
+    font-size: 0.7rem;
+    color: #b09fff;
+    margin-top: 6px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .exp-bullets li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  .exp-bullets li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+    transition: border-color 0.2s;
+  }
+
+  .skill-card:hover { border-color: rgba(0,229,255,0.2); }
+
+  .skill-cat {
+    font-size: 0.7rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    transition: all 0.15s;
+  }
+
+  .skill-tag:hover {
+    background: rgba(0,229,255,0.1);
+    border-color: rgba(0,229,255,0.3);
+    color: var(--accent);
+  }
+
+  /* COMPETENCIES */
+  .comp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .comp-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.82rem;
+    color: var(--text);
+    font-weight: 600;
+    transition: border-color 0.2s;
+  }
+
+  .comp-item:hover { border-color: rgba(0,229,255,0.2); }
+
+  .comp-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .contact-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,229,255,0.1);
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px;
+    border-radius: 8px;
+    background: rgba(0,229,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .contact-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .contact-val {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .edu-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .edu-degree {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .edu-uni {
+    color: var(--muted);
+    font-size: 0.88rem;
+    margin-bottom: 4px;
+  }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--accent);
+  }
+
+  /* ACHIEVEMENT */
+  .achievement-card {
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(123,97,255,0.05));
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-top: 24px;
+  }
+
+  .achievement-title {
+    font-size: 0.72rem;
+    font-family: 'DM Mono', monospace;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .achievement-text {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .hobbies {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .hobby-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,107,53,0.1);
+    border: 1px solid rgba(255,107,53,0.2);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 0.72rem;
+    color: #ff9166;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 20px 60px; }
+    section { padding: 60px 20px; }
+    .metrics-strip { padding: 0 20px; }
+    .metric-item { border-right: none; border-bottom: 1px solid var(--border); }
+    footer { padding: 24px 20px; }
+    .exp-header { flex-direction: column; }
+    .exp-meta { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SC</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for opportunities</div>
+    <h1 class="hero-name">
+      <span>Shrikant</span>
+      <span>Chaturvedi</span>
+    </h1>
+    <p class="hero-title">Application & Production Support Engineer</p>
+    <p class="hero-desc">
+      5+ years across BFSI (Wealth Management), GST Compliance &amp; ERP (Accounts Payable).
+      Specialised in L1/L2 production support, P1/P2 incident management, RCA &amp; SLA adherence
+      for mission-critical financial applications.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:shrikantchaturvedi14@gmail.com" class="btn btn-primary">✉ Hire Me</a>
+      <a href="https://linkedin.com/in/shrikant-chaturvedi" target="_blank" class="btn btn-secondary">↗ LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- METRICS -->
+<div class="metrics-strip">
+  <div class="metric-item">
+    <div class="metric-val">30%</div>
+    <div class="metric-label">Reduction in P1/P2 Incidents</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val">25%</div>
+    <div class="metric-label">Faster Resolution Time</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val">100%</div>
+    <div class="metric-label">Statutory GST Compliance</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val">&lt;4 hrs</div>
+    <div class="metric-label">MTTR — P1 Incidents</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val">99.8%</div>
+    <div class="metric-label">Application Uptime (8 Sites)</div>
+  </div>
+  <div class="metric-item">
+    <div class="metric-val">20+</div>
+    <div class="metric-label">RCA Reports & Runbooks</div>
+  </div>
+</div>
+
+<!-- COMPETENCIES -->
+<section>
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">Core Competencies</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="comp-grid">
+    <div class="comp-item"><span class="comp-dot"></span>L1/L2 Production Support</div>
+    <div class="comp-item"><span class="comp-dot"></span>Incident & Problem Management</div>
+    <div class="comp-item"><span class="comp-dot"></span>Root Cause Analysis (RCA)</div>
+    <div class="comp-item"><span class="comp-dot"></span>SLA / KPI Management</div>
+    <div class="comp-item"><span class="comp-dot"></span>Batch Job & Alert Monitoring</div>
+    <div class="comp-item"><span class="comp-dot"></span>ITIL v4 Framework</div>
+    <div class="comp-item"><span class="comp-dot"></span>Change Management</div>
+    <div class="comp-item"><span class="comp-dot"></span>Cross-Team Bridge Coordination</div>
+    <div class="comp-item"><span class="comp-dot"></span>Observability & APM</div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Work Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">LifeCircles Infomedia Pvt Ltd</div>
+          <div class="exp-role">App & Production Support Engineer</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">Mar 2025 – Present</div>
+          <div class="exp-badge">BFSI – Wealth Management</div>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li><strong>30% reduction in recurring P1/P2 incidents</strong> via structured RCA across Wealth Management applications (portfolios, NAV, trade lifecycle).</li>
+        <li>Resolved <strong>20+ high-severity incidents within SLA</strong> — led bridge calls with 30-min response and 4-hr resolution across Dev, Infra, DBA &amp; vendor teams.</li>
+        <li>Eliminated trade settlement &amp; portfolio mismatch failures through deep-dive <strong>Oracle SQL backend validation</strong>.</li>
+        <li>Monitored CPU, Memory, API latency &amp; JVM health using <strong>Dynatrace and Grafana</strong> — proactively resolving issues before business hours.</li>
+        <li>Proactively resolved <strong>JVM memory leaks</strong> using Dynatrace APM dashboards; coordinated permanent code-level fixes with Dev team.</li>
+        <li>Built a <strong>reusable RCA knowledge base with 20+ reports</strong> covering trade settlement failures, batch delays &amp; API timeout patterns.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Indus Towers Limited</div>
+          <div class="exp-role">Application Support Engineer</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">Aug 2024 – Dec 2024</div>
+          <div class="exp-badge">GST Compliance & Tax</div>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Sole GST compliance owner across <strong>6 states</strong> — managed GSTR-1 &amp; GSTR-3B filings with 100% statutory accuracy and zero penalties.</li>
+        <li><strong>Reduced incident resolution time by 25%</strong> via proactive monitoring on Dynatrace, Grafana &amp; Splunk.</li>
+        <li>Eliminated RCM data discrepancies by building <strong>Oracle SQL-driven reconciliation workflows</strong>.</li>
+        <li>Resolved E-Way Bill compliance failures using ServiceNow, SAP, Linux logs &amp; Postman API testing — implemented preventive controls across all 6 GSTINs.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Usha International</div>
+          <div class="exp-role">Application Support Associate</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">Jun 2023 – Aug 2024</div>
+          <div class="exp-badge">ERP – Accounts Payable</div>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Sole support owner for <strong>8 pan-India locations, 1,000+ users</strong> — 99.8%+ uptime and zero escalation backlog.</li>
+        <li>Reduced invoice processing errors via deep-dive RCA using <strong>SAP, Oracle SQL &amp; Dynatrace</strong>.</li>
+        <li>Owned full invoice validation cycle and delivered structured Excel reconciliation reports to the Treasury Department.</li>
+        <li><strong>Cut incident resolution time by 25%</strong> through proactive monitoring across Dynatrace, Grafana, Splunk &amp; Linux log analysis.</li>
+      </ul>
+    </div>
+
+    <div class="exp-card">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Tech Consulting</div>
+          <div class="exp-role">Application Support Associate</div>
+        </div>
+        <div class="exp-meta">
+          <div class="exp-period">Dec 2020 – May 2023</div>
+          <div class="exp-badge">ERP – Accounts Payable L1</div>
+        </div>
+      </div>
+      <ul class="exp-bullets">
+        <li>Maintained consistent <strong>SLA compliance</strong> for L1 support tickets across AP workflows.</li>
+        <li>Delivered detailed escalation packages — logs, error traces &amp; impact analysis — reducing L2/L3 turnaround cycles.</li>
+        <li>Built foundational ITIL-aligned incident management practices with clean audit trails.</li>
+        <li>Improved <strong>first-contact resolution rate</strong> through systematic troubleshooting and personal knowledge base.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Tools & Technologies</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-cat">Monitoring & APM</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Dynatrace</span>
+        <span class="skill-tag">Grafana</span>
+        <span class="skill-tag">Prometheus</span>
+        <span class="skill-tag">Splunk</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Databases</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Oracle SQL</span>
+        <span class="skill-tag">SQL Server</span>
+        <span class="skill-tag">Query Tuning</span>
+        <span class="skill-tag">Indexes</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Operating Systems</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Linux RHEL</span>
+        <span class="skill-tag">Unix (Solaris)</span>
+        <span class="skill-tag">Bash Scripting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Cloud (AWS)</div>
+      <div class="skill-tags">
+        <span class="skill-tag">EC2</span>
+        <span class="skill-tag">IAM</span>
+        <span class="skill-tag">CloudWatch</span>
+        <span class="skill-tag">AWS CLI</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">ITSM / Ticketing</div>
+      <div class="skill-tags">
+        <span class="skill-tag">ServiceNow</span>
+        <span class="skill-tag">BMC Remedy</span>
+        <span class="skill-tag">ITIL v4</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">ERP / Enterprise</div>
+      <div class="skill-tags">
+        <span class="skill-tag">SAP ECC 6.0</span>
+        <span class="skill-tag">SAP Fiori</span>
+        <span class="skill-tag">AP Module</span>
+        <span class="skill-tag">GST Module</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">API Testing</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Postman</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">SOAP APIs</span>
+        <span class="skill-tag">HTTP/HTTPS</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Web / App Servers</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Nginx</span>
+        <span class="skill-tag">Tomcat</span>
+        <span class="skill-tag">JVM/GC Monitoring</span>
+        <span class="skill-tag">Load Balancer</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Container & CI/CD</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Docker</span>
+        <span class="skill-tag">Kubernetes</span>
+        <span class="skill-tag">Jenkins</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-cat">Scripting & Automation</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Shell/Bash</span>
+        <span class="skill-tag">Cron Jobs</span>
+        <span class="skill-tag">grep/awk/sed</span>
+        <span class="skill-tag">Log Analysis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Education & Achievements</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">Bachelor of Commerce (B.Com)</div>
+      <div class="edu-uni">Dr. Hari Singh Gour University, Sagar, Madhya Pradesh</div>
+      <div class="edu-year">Graduated 2020</div>
+    </div>
+  </div>
+
+  <div class="achievement-card">
+    <div class="achievement-title">🏆 Award — Best Speaker</div>
+    <div class="achievement-text">
+      Awarded <strong>Best Speaker</strong> at Dr. Hari Singh Gour University for presenting on
+      <em>"Information Technology: Easing Accounting Standards & Auditing Compliance"</em> —
+      demonstrating applied knowledge of how enterprise tools such as SAP, Oracle, and automation
+      frameworks streamline financial reporting, statutory filings, and audit trail management.
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Get In Touch</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-grid">
+    <a href="tel:+916264795845" class="contact-card">
+      <div class="contact-icon">📞</div>
+      <div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-val">+91-6264795845</div>
+      </div>
+    </a>
+    <a href="mailto:shrikantchaturvedi14@gmail.com" class="contact-card">
+      <div class="contact-icon">✉️</div>
+      <div>
+        <div class="contact-label">Email</div>
+        <div class="contact-val">shrikantchaturvedi14@gmail.com</div>
+      </div>
+    </a>
+    <a href="https://linkedin.com/in/shrikant-chaturvedi" target="_blank" class="contact-card">
+      <div class="contact-icon">💼</div>
+      <div>
+        <div class="contact-label">LinkedIn</div>
+        <div class="contact-val">linkedin.com/in/shrikant-chaturvedi</div>
+      </div>
+    </a>
+    <div class="contact-card">
+      <div class="contact-icon">📍</div>
+      <div>
+        <div class="contact-label">Location</div>
+        <div class="contact-val">New Delhi / Open to Relocation</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Shrikant Chaturvedi — App & Production Support Engineer</p>
+  <div class="hobbies">
+    <span class="hobby-tag">✍️ Poetry Writing</span>
+    <span class="hobby-tag">🎤 Stand-Up Comedy</span>
+    <span class="hobby-tag">🎙️ Open Mic Performer</span>
+  </div>
+</footer>
+
+</body>
+</html>
